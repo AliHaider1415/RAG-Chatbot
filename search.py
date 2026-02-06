@@ -3,10 +3,11 @@ from dotenv import load_dotenv
 from pinecone import Pinecone
 from embeddings import embed
 from llm import generate_answer
+import streamlit as st
 
 load_dotenv()
 
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_API_KEY = st.secrets["PINECONE_API_KEY"]
 INDEX_NAME = "nutrition-index"
 
 pc = Pinecone(api_key=PINECONE_API_KEY)

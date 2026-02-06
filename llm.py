@@ -1,11 +1,8 @@
-import os
-from dotenv import load_dotenv
+import streamlit as st
 from huggingface_hub import InferenceClient
 
-load_dotenv()
-
 client = InferenceClient(
-    api_key=os.getenv("HUGGINGFACE_API_KEY"),
+    api_key=st.secrets["HUGGINGFACE_API_KEY"],
 )
 
 def llm_inference(prompt):
