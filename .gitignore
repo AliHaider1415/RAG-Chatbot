@@ -4,3 +4,4 @@ upload_docs.py
 # Ignore environment files and python cache
 .env
 __pycache__/
+test_stream.py
