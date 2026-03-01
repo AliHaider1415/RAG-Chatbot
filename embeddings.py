@@ -1,9 +1,12 @@
+import os
+
 import torch
 from transformers import AutoTokenizer, AutoModel
 
 MODEL_NAME = "google/embeddinggemma-300m"
+TOKEN = os.environ["HUGGINGFACE_API_KEY"]
 
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=TOKEN)
 model = AutoModel.from_pretrained(MODEL_NAME)
 
 def embed(texts):
@@ -19,4 +22,4 @@ def embed(texts):
 
     # Mean pooling
     embeddings = outputs.last_hidden_state.mean(dim=1)
-    return embeddings.numpy()
+    return embeddings.cpu().numpy()
