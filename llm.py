@@ -1,5 +1,7 @@
-from huggingface_hub import InferenceClient
+from huggingface_hub import InferenceClient, login
 from app.core.config import HUGGINGFACE_API_KEY
+
+login(token=HUGGINGFACE_API_KEY)
 
 client = InferenceClient(
     api_key=HUGGINGFACE_API_KEY,
