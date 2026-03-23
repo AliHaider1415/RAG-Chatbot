@@ -5,7 +5,7 @@ from transformers import AutoTokenizer, AutoModel
 from app.core.config import HUGGINGFACE_API_KEY, MODEL_NAME
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=HUGGINGFACE_API_KEY)
-model = AutoModel.from_pretrained(MODEL_NAME)
+model = AutoModel.from_pretrained(MODEL_NAME, token=HUGGINGFACE_API_KEY)
 
 def embed(texts):
     inputs = tokenizer(
