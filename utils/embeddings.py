@@ -2,11 +2,9 @@ import os
 
 import torch
 from transformers import AutoTokenizer, AutoModel
+from app.core.config import HUGGINGFACE_API_KEY, MODEL_NAME
 
-MODEL_NAME = "google/embeddinggemma-300m"
-TOKEN = os.environ["HUGGINGFACE_API_KEY"]
-
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=TOKEN)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=HUGGINGFACE_API_KEY)
 model = AutoModel.from_pretrained(MODEL_NAME)
 
 def embed(texts):
