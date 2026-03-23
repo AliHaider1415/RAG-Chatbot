@@ -1,21 +1,19 @@
 import os
-
-import torch
-# from transformers import AutoTokenizer, AutoModel
 from sentence_transformers import SentenceTransformer
 from app.core.config import HUGGINGFACE_API_KEY, MODEL_NAME
 
-# tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, token=HUGGINGFACE_API_KEY)
-# model = AutoModel.from_pretrained(MODEL_NAME, token=HUGGINGFACE_API_KEY)
+_model = None
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+def get_model():
+    global _model
+    if _model is None:
+        _model = SentenceTransformer("all-MiniLM-L6-v2")
+    return _model
 
 def embed(texts):
-    """
-    Returns embeddings as list of floats (compatible with Pinecone)
-    """
+    model = get_model()
     return model.encode(
         texts,
         convert_to_numpy=True,
-        normalize_embeddings=True  # optional but recommended for similarity
+        normalize_embeddings=True
     ).tolist()
