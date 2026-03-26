@@ -5,9 +5,6 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
-from utils.llm import generate_answer
-from utils.search import search
-
 PORT = int(os.environ.get("PORT", 8000))
 
 app = FastAPI()
@@ -43,6 +40,8 @@ async def root():
 @app.post("/chat/stream")
 async def chat(request: ChatRequest):
     try:
+        from utils.search import search
+        from utils.llm import generate_answer
         retrieved_chunks = search(request.question)
         context = "\n".join(retrieved_chunks)
 
