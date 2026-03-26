@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from utils.llm import generate_answer
 from utils.search import search
 
+PORT = int(os.environ.get("PORT", 8000))
+
 app = FastAPI()
 
 _cors_origins = os.getenv("CORS_ALLOW_ORIGINS", "*")
